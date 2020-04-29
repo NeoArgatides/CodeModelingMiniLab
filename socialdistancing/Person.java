@@ -1,5 +1,6 @@
 package socialdistancing;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 // A person contains properties of Health
@@ -138,6 +139,8 @@ public class Person extends Resident {
 		}
 			
 	}
+	
+	
 	
 	/*
 	 * Key properties of person
