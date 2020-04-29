@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-public class Wall{
+public class Wall extends Building{
 
     protected int x;
     protected int y;
