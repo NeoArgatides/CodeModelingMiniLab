@@ -1,5 +1,5 @@
 package socialdistancing;
-import java.awt.Color; 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Rectangle;
@@ -15,12 +15,12 @@ import javax.swing.Timer;
 
 
 /* 
-	Window extends JPanel so that we can override the paint method. The paint method is necessary to use the simple
+	Building extends JPanel so that we can override the paint method. The paint method is necessary to use the simple
 	drawing tools of the library! 
 	Simulator implements an ActionListener which adds the method actionPerformed. This method is invoked by the 
 	animation timer every timerValue(16ms).
 */
-public class Window extends JPanel implements ActionListener{
+public class Building extends JPanel implements ActionListener{
 	// serial suppresses warning
 	private static final long serialVersionUID = 1L;
 	
@@ -30,8 +30,10 @@ public class Window extends JPanel implements ActionListener{
 	Timer timer; //Event control	
 	int time = 0; //Track time as the simulation runs
 	
+	public Building() {}
+	
 	/* constructor will setup our main Graphic User Interface - a simple Frame! */
-	public Window(Control ctl, String title) {
+	public Building(Control ctl, String title) {
 		// used for Control callback
 		this.control = ctl;
 		
@@ -77,62 +79,38 @@ public class Window extends JPanel implements ActionListener{
 		
 		//events
 		super.paintComponent(g); // a necessary call to the parent paint method, required for proper screen refreshing
-		paintWalls(g);
+		control.paintWalls(g);
 		control.paintPersons(g); // repaint all objects in simulation
 		
 	} 
 		
-	//Declares Wall sprites and positions of walls
-	Wall vWall1 = new Wall(550, 0, "SocialDistancingImages/wall2.png", true);
-	Wall vWall2 = new Wall(200, 0, "SocialDistancingImages/wall2.png", true);
-    Wall vWall3 = new Wall(550, 400, "SocialDistancingImages/wall2.png", true);
-    Wall vWall4 = new Wall(200, 400, "SocialDistancingImages/wall2.png", true);
+	 //Declares Wall sprites and positions of walls
+	  Wall vWall1 = new Wall(550, 0, "SocialDistancingImages/wall2.png", true);
+	  Wall vWall2 = new Wall(200, 0, "SocialDistancingImages/wall2.png", true);
+	  Wall vWall3 = new Wall(550, 400, "SocialDistancingImages/wall2.png", true);
+	  Wall vWall4 = new Wall(200, 400, "SocialDistancingImages/wall2.png", true);
 	
-    Wall hWall1 = new Wall(620, 160, "SocialDistancingImages/wall1.png", false);
-    Wall hWall2 = new Wall(-25, 160, "SocialDistancingImages/wall1.png", false);
-    Wall hWall3 = new Wall(620, 400, "SocialDistancingImages/wall1.png", false);
-	Wall hWall4 = new Wall(-25, 400, "SocialDistancingImages/wall1.png", false);
-	Wall[] walls = {vWall1, hWall1, vWall2, hWall2, vWall3, hWall3, vWall4, hWall4};
-    Rectangle[] r = {vWall1.getBounds(), hWall1.getBounds(), vWall2.getBounds(), hWall2.getBounds(),
+	  Wall hWall1 = new Wall(620, 160, "SocialDistancingImages/wall1.png", false);
+	  Wall hWall2 = new Wall(-25, 160, "SocialDistancingImages/wall1.png", false);
+	  Wall hWall3 = new Wall(620, 400, "SocialDistancingImages/wall1.png", false);
+	  Wall hWall4 = new Wall(-25, 400, "SocialDistancingImages/wall1.png", false);
+	  Wall[] walls = {vWall1, hWall1, vWall2, hWall2, vWall3, hWall3, vWall4, hWall4};
+	  Rectangle[] r = {vWall1.getBounds(), hWall1.getBounds(), vWall2.getBounds(), hWall2.getBounds(),
 			vWall3.getBounds(), hWall3.getBounds(), vWall4.getBounds(), hWall4.getBounds()};
-	
-	public void paintWalls(Graphics g) {
-
-		//draws vertical walls
-		g.drawImage(vWall1.getImage(), vWall1.getX(), vWall1.getY(), frame);
-		g.drawImage(vWall2.getImage(), vWall2.getX(), vWall2.getY(), frame);
-		g.drawImage(vWall3.getImage(), vWall3.getX(), vWall3.getY(), frame);
-		g.drawImage(vWall4.getImage(), vWall4.getX(), vWall4.getY(), frame);
-		
-		//draws horizontal walls
-		g.drawImage(hWall1.getImage(), hWall1.getX(), hWall1.getY(), frame);
-		g.drawImage(hWall2.getImage(), hWall2.getX(), hWall2.getY(), frame);
-		g.drawImage(hWall3.getImage(), hWall3.getX(), hWall3.getY(), frame);
-		g.drawImage(hWall4.getImage(), hWall4.getX(), hWall4.getY(), frame);
-		
-		//sets text color
-		g.setColor(Color.BLACK);
-		g.setFont(new Font("Roboto", Font.BOLD, 20));
-		
-		g.drawString("Sprouts", 610, 50);
-		g.drawString("Scripps Medical", 5, 50);
-		g.drawString("Board and Brew", 5, 440);
-		g.drawString("Mr. M's House", 590, 440);
-		
-	}
-	
-	public void personToWallCollision(Person p) {
-		
-		Rectangle personRect = new Rectangle(p.x,p.y, p.width, p.height);
-		for(int i = 0; i < walls.length;i++)
-		{
-			if(r[i].intersects(personRect))
-				if(walls[i].vertical)
-				{
-					p.vx *= -1;
-				}
-				else
-					p.vy *= -1;
+	 
+	 public void personToWallCollision(Person p) {
+			
+			Rectangle personRect = new Rectangle(p.x,p.y, p.width, p.height);
+			for(int i = 0; i < walls.length;i++)
+			{
+				if(r[i].intersects(personRect))
+					if(walls[i].vertical)
+					{
+						p.vx *= -1;
+					}
+					else
+						p.vy *= -1;
+			}
 		}
-	}
+
 }

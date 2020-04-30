@@ -6,11 +6,11 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Control {
+public class Control extends Building{
 		String title = "Social Distance Simulation";
 		//Model and View
 		ArrayList<Person> model; //the community of Person objects	
-		Window view; //JPanel graphics window
+		Building view; //JPanel graphics window
 		
 		// counters for "this" simulation instance
 		public int numInfected = 0;
@@ -97,7 +97,7 @@ public class Control {
 		 */
 		public void runSimulation() {
 			//Setup to the Simulation Panel/Frame
-			Window view = new Window(this, title);
+			Building view = new Building(this, title);
 			
 			//Setup the People
 			model = new ArrayList<Person>();
@@ -153,12 +153,32 @@ public class Control {
 			}
 		}
 		
+		public void paintWalls(Graphics g) {
+
+			//draws vertical walls
+			g.drawImage(vWall1.getImage(), vWall1.getX(), vWall1.getY(), view);
+			g.drawImage(vWall2.getImage(), vWall2.getX(), vWall2.getY(), view);
+			g.drawImage(vWall3.getImage(), vWall3.getX(), vWall3.getY(), view);
+			g.drawImage(vWall4.getImage(), vWall4.getX(), vWall4.getY(), view);
+			
+			//draws horizontal walls
+			g.drawImage(hWall1.getImage(), hWall1.getX(), hWall1.getY(), view);
+			g.drawImage(hWall2.getImage(), hWall2.getX(), hWall2.getY(), view);
+			g.drawImage(hWall3.getImage(), hWall3.getX(), hWall3.getY(), view);
+			g.drawImage(hWall4.getImage(), hWall4.getX(), hWall4.getY(), view);
+			
+			//sets text color
+			g.setColor(Color.BLACK);
+			g.setFont(new Font("Roboto", Font.BOLD, 20));
+			
+			g.drawString("Sprouts", 610, 50);
+			g.drawString("Scripps Medical", 5, 50);
+			g.drawString("Board and Brew", 5, 440);
+			g.drawString("Mr. M's House", 590, 440);
+			
+		}
+		
 
 		
-		
-		
-		
-
-	
 		
 }
