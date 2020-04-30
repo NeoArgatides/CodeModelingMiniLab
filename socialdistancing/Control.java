@@ -6,7 +6,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Control extends Building{
+public class Control {
 		String title = "Social Distance Simulation";
 		//Model and View
 		ArrayList<Person> model; //the community of Person objects	
@@ -153,6 +153,21 @@ public class Control extends Building{
 			}
 		}
 		
+		//Declares Wall sprites and positions of walls
+		static Wall vWall1 = new Wall(550, 0, "SocialDistancingImages/wall2.png", true);
+		static Wall vWall2 = new Wall(200, 0, "SocialDistancingImages/wall2.png", true);
+		static Wall vWall3 = new Wall(550, 400, "SocialDistancingImages/wall2.png", true);
+		static Wall vWall4 = new Wall(200, 400, "SocialDistancingImages/wall2.png", true);
+		
+		static Wall hWall1 = new Wall(620, 160, "SocialDistancingImages/wall1.png", false);
+		static Wall hWall2 = new Wall(-25, 160, "SocialDistancingImages/wall1.png", false);
+		static Wall hWall3 = new Wall(620, 400, "SocialDistancingImages/wall1.png", false);
+		static Wall hWall4 = new Wall(-25, 400, "SocialDistancingImages/wall1.png", false);
+		static Wall[] walls = {vWall1, hWall1, vWall2, hWall2, vWall3, hWall3, vWall4, hWall4};
+		static Rectangle[] r = {vWall1.getBounds(), hWall1.getBounds(), vWall2.getBounds(), hWall2.getBounds(),
+				vWall3.getBounds(), hWall3.getBounds(), vWall4.getBounds(), hWall4.getBounds()};
+		
+		
 		public void paintWalls(Graphics g) {
 
 			//draws vertical walls
@@ -179,6 +194,19 @@ public class Control extends Building{
 		}
 		
 
-		
+		public void personToWallCollision(Person p) {
+			
+			Rectangle personRect = new Rectangle(p.x,p.y, p.width, p.height);
+			for(int i = 0; i < walls.length;i++)
+			{
+				if(r[i].intersects(personRect))
+					if(walls[i].vertical)
+					{
+						p.vx *= -1;
+					}
+					else
+						p.vy *= -1;
+			}
+		}
 		
 }

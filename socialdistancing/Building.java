@@ -98,19 +98,6 @@ public class Building extends JPanel implements ActionListener{
 	  Rectangle[] r = {vWall1.getBounds(), hWall1.getBounds(), vWall2.getBounds(), hWall2.getBounds(),
 			vWall3.getBounds(), hWall3.getBounds(), vWall4.getBounds(), hWall4.getBounds()};
 	 
-	 public void personToWallCollision(Person p) {
-			
-			Rectangle personRect = new Rectangle(p.x,p.y, p.width, p.height);
-			for(int i = 0; i < walls.length;i++)
-			{
-				if(r[i].intersects(personRect))
-					if(walls[i].vertical)
-					{
-						p.vx *= -1;
-					}
-					else
-						p.vy *= -1;
-			}
-		}
+	
 
 }
